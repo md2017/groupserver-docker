@@ -68,8 +68,7 @@ RUN  /etc/init.d/postgresql start &&\
         groupserver
 
 # Add VOLUMEs to allow backup of config, logs and databases
-VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql", 
-         "/opt/groupserver/parts/log", "/opt/groupserver/parts/instance" ]
+VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql", "/opt/groupserver/parts/log", "/opt/groupserver/parts/instance" ]
 
 # Expose the ports for PostgreSQL and GroupServer
 EXPOSE 5432
