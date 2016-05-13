@@ -60,7 +60,7 @@ USER groupserver
 RUN git clone https://github.com/groupserver/buildout /opt/groupserver &&\
     virtualenv --python=python2.7 /opt/groupserver &&\
     . /opt/groupserver/bin/activate &&\
-    /opt/groupserver/bin/pip install zc.buildout==1.7.1
+    /opt/groupserver/bin/pip install zc.buildout==2.5.0
 
 USER root
 RUN  /etc/init.d/postgresql start &&\
