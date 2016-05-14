@@ -63,9 +63,10 @@ RUN git clone https://github.com/groupserver/buildout /opt/groupserver &&\
     /opt/groupserver/bin/pip install zc.buildout==2.5.0
 
 USER root
-RUN  /etc/init.d/postgresql start &&\
-     su -c "/opt/groupserver/bin/buildout -N -c /opt/groupserver/buildout.cfg"\
-        groupserver
+RUN  /etc/init.d/postgresql start
+
+USER groupserver
+RUN virtualenv --python=python2.7 /opt/groupserver && . /opt/groupserver/bin/activate && /opt/groupserver/bin/buildout -N -c /opt/groupserver/buildout.cfg
 
 # Add VOLUMEs to allow backup of config, logs and databases
 VOLUME  ["/etc/postgresql", "/var/log/postgresql", "/var/lib/postgresql", "/opt/groupserver/parts/log", "/opt/groupserver/parts/instance" ]
@@ -75,6 +76,7 @@ EXPOSE 5432
 EXPOSE 8080
 
 # Set the default command to run when starting the container
+USER root
 CMD ["/sbin/init"]
 
-USER groupserver
+USER root
